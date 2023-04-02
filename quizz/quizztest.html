@@ -1,0 +1,226 @@
+ <!DOCTYPE html>
+ <html>
+ <head>
+ 	<meta charset="utf-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<title>QuizzApp</title>
+ </head>
+ <style>
+
+ 	body {
+ 		background-color: #333;
+ 		font-family: "Segoe UI", roboto;
+ 	}
+ 	#quizzApp{
+ 		width: 50%;
+ 		background-color: white;
+ 		box-shadow: 5px 5px 5px grey;
+ 		text-align: center;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
+
+ 	}
+ 	.mybutton{
+/*	    padding-top: 10px;*/
+	    margin-top: 75px;
+	    background-color: indigo;
+	    color: white;
+	    font-size: 25px;
+	    width: 100%;
+ 		height: 100px;
+ 	}
+ 	.card-footer{
+ 		width: 100%;
+ 		height: 100px;
+ 	}
+ 	.choice{
+ 		text-align: left;
+ 		font-size: 20px;
+ 		text-justify: center;
+ 		padding: 0 50px;
+ 		margin: 0 50px;
+ 	}
+ 	#card{
+ 		height: 380px;
+ 	}
+ 	@media screen and (max-width: 768px) and (min-width: 368px) {
+ 		h1{
+ 			font-size: 18px;
+ 		}
+ 		.choice{
+ 		text-align: left;
+ 		font-size: 15px;
+ 		text-justify: center;
+ 		padding: 0 10px;
+ 		margin: 0 10px;
+ 		}
+ 		#card{
+ 		height: 300px;
+ 		}
+ 		.mybutton{
+	/*	    padding-top: 10px;*/
+		    margin-top: 15px;
+		    background-color: indigo;
+		    color: white;
+		    font-size: 10px;
+		    width: 100%;
+	 		height: 20px;
+ 		}
+ 		#card{
+ 		height: 250px;
+ 		}
+	}
+
+ </style>
+ <body>
+ <div id="quizzApp">
+ 		<div id="card">
+ 			<div id="card-header">
+ 				<h2 id="card-title"></h2>
+ 			</div>
+ 			<div id="card-body">
+ 				
+ 			</div>
+ 			<div class="card-footer">
+ 				<button class="mybutton" id="mybutton">Valider</button>
+ 			</div>
+ 		</div>
+ </div>
+
+ <script type="text/javascript">
+ 	const questions = [
+    {
+        question: 'Quel est le meilleur language de Programmation en 2022?',
+        choix: [
+            "Java",
+            "C",
+            "Python",
+            "JavaScript",
+        ],
+        correct: 3,
+    },
+    {
+        question: 'Quel evenement est relie au click de l utilisateur sur un element HTML?',
+        choix: [
+            'onmouseover',
+            'onclick',
+            'onmouseclick',
+            'onchange',
+        ],
+        correct: 1,
+    },
+    {
+        question: '              Quel est la syntaxe correcte pour une boucle pour?         ',
+        choix: [
+            'for (i = 0; i <= 5)',
+            'for i = 1 to 5',
+            'for (i = 0; i <= 5; i++)',
+            'for (i <= 5; i++)',
+        ],
+        correct: 2,
+    },
+    {
+        question: 'Quel syntaxe permet de dire Si "i" n \'est pas egal a 5?',
+        choix: [
+            'if i =! 5 then',
+            'if (i <> 5)',
+            'if (i != 5)',
+            'if i <> 5',
+        ],
+        correct: 2,
+    }
+];
+
+// function incrementer(num) {
+// 	return num++;
+// };
+
+let q = document.getElementById('card-title')
+let items = document.getElementById('card-body')
+
+function lancerQuestionnaire(numero) {
+	let reponses = []
+	q.innerText=questions[numero]['question']
+	for (let i = 0; i < questions.length; i++) {
+		const radioButton = document.createElement('input');
+		radioButton.type = 'radio';
+		radioButton.id = 'radioButton';
+		radioButton.name = 'radioGroup';
+
+		const label = document.createElement('label');
+		let labs = 'mylabel'+i
+		label.setAttribute('id',labs)
+		label.setAttribute('for', 'radioButton');
+		label.innerText = questions[numero]['choix'][i];
+		label.style.lineHeight = '2'
+
+		const container = document.createElement("div");
+		container.classList.add('choice')
+		container.appendChild(radioButton);
+		container.appendChild(label);
+		items.appendChild(container);
+
+		let boxes = document.querySelectorAll('input')
+		boxes.forEach(box => ()=>{
+			labs = box.attributes
+			reponses.push(labs.value)
+		});
+		alert(reponses)
+		// let boxval = box.checked[0].value
+		// // reponses.push(boxval)
+	}
+}
+
+//par defaut la premiere carte
+lancerQuestionnaire(0);
+
+function voirReponses() {
+	alert('reponses')
+}
+
+let btnValide = document.getElementById('mybutton')
+let compteur = 0;
+
+btnValide.addEventListener('click', function() {
+	compteur ++;
+	q.innerText=questions[compteur]['question']
+
+	for (let i = 0; i < 4; i++) {
+		let l = 'mylabel'+i
+		let lab = document.getElementById(l)
+		lab.innerText = questions[compteur]['choix'][i];
+		if (compteur==3) {
+			q.innerText=''
+			for (let i = 0; i < 4; i++) {
+				let l = 'mylabel'+i
+				let lab = document.getElementById(l)
+				lab.innerText = '';
+			}
+			btnValide.innerText=''
+			inputs = document.querySelectorAll('input')
+			const container = document.createElement("h1");
+			container.innerText = 'Vous avez trouve 1/4 reponses'
+			items.appendChild(container);
+			// items.removeChild(inputs)
+			link = document.createElement("a");
+			link.href='quizztest.html'
+			link.innerText = 'Rejouer'
+			link.style.color = 'white'
+			btnValide.appendChild(link)
+			// voirReponses()
+			break
+		}
+	}
+
+
+});
+
+
+
+
+ </script>
+ </body>
+ </html>

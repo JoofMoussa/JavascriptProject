@@ -1,0 +1,36 @@
+.question-card {
+    width: 550px;
+    margin: 15px;
+    padding: 100px;
+    border: 1px solid green;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px grey;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.question-card > button {
+    width: 550px;
+    border-radius: 12px;
+    padding-top: 10px;
+    margin-top: 30px;
+    background-color: indigo;
+    color: white;
+    font-size: 25px;
+}
+
+.answer-card {
+    margin: 15px;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.big{
+    font-size: 20px;
+
+}
+.text-light{
+    color: white;
+}

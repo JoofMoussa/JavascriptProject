@@ -1,0 +1,156 @@
+
+	.container{
+		background-color: lightgrey;
+		height: 70%;
+		width: 95%;
+		border-radius: 10px;
+		position: absolute;
+		top: 55%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+	button{
+		font-size: 100%;
+		color: white;
+		margin: 15px;
+		padding:20px;
+		margin-left: 5%;
+		border-radius: 10px;
+		box-shadow: 0 2px 2px black;
+	}
+	.bContent{
+		width: 75%;
+		height: 20%;
+		background-color: #fff;
+		margin-left: 40px;
+		margin-top: 100px;
+		border-radius: 5px;
+	}
+	#mesboutons{
+		padding-top: 30px;
+		margin: 0 50px;
+	}
+
+	.success{
+		background-color: green;
+	}
+	.warning{
+		background-color: gold;
+	}
+	.danger{
+		background-color: red;
+	}
+	.info{
+		background-color: blue;
+	}
+	.pt30{
+		padding-top: 30px;
+	}
+	.plus{
+		background-color: black;
+		color: white;
+	}
+	.notifications{
+		float: right;
+		border: 2px solid black ; 
+		height: 50px; width: 230px; 
+		margin: 20px; 
+		text-align: center; 
+		border-radius: 10px; 
+		padding-top: 15px;
+	}
+	.pt235{
+		padding-top: 235px;
+	}
+
+@media screen and (max-width: 768px){
+	body{
+		background-color: #333;
+	}
+	.container{
+		background-color: lightgrey;
+		height: 70%;
+		width: 95%;
+		border-radius: 5px;
+	}
+	button{
+		font-size: 15px;
+		color: white;
+		margin: 2px;
+		padding: 2px;
+		border-radius: 5px;
+		box-shadow: 0 1px 1px black;
+	}
+	.bContent{
+		height: 30%;
+		width: 80%;
+		background-color: #fff;
+		margin-left: 20px;
+		margin-top: 50px;
+		border-radius: 2px;
+	}
+	#mesboutons{
+		padding-top: 5px;
+		margin: 0 10px;
+	}
+	.notifications{
+		float: right;
+		border: 2px solid black ; 
+		height: 20px; width: 60px; 
+		font-size: 8px;
+		margin: 10px; 
+		text-align: center; 
+		border-radius: 5px; 
+		padding-top: 8px;
+	}
+	.pt235{
+		padding-top: 50px;
+	}
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1440px){
+	body{
+		background-color: aqua;
+	}
+	.container{
+		background-color: lightgrey;
+		height: 300px;
+		width: 95%;
+		border-radius: 5px;
+	}
+	button{
+		font-size: 20px;
+		color: white;
+		margin: 2px;
+		padding: 10px;
+		border-radius: 5px;
+		box-shadow: 0 1px 1px black;
+	}
+	.bContent{
+		height: 70%;
+		width: 95%;
+		background-color: #fff;
+		margin-left: 20px;
+		margin-top: 50px;
+		border-radius: 2px;
+	}
+	#mesboutons{
+		padding-top: 15px;
+		margin: 0 25px;
+	}
+	.notifications{
+		float: right;
+		border: 2px solid black ; 
+		height: 15%; width: 15%; 
+		font-size: 18px;
+		margin: 10px; 
+		text-align: center; 
+		border-radius: 5px; 
+		padding-top: 8px;
+	}
+	.pt235{
+		padding-top: 50px;
+	}
+
+}

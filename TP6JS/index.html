@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="../styles.css">
+	<title>Compte a rebours</title>
+</head>
+<style type="text/css">
+	.conteneur{
+		text-align: center;
+
+	}
+	#lireDate{
+		font-size: 60px;
+		font-weight: bolder;
+	}
+	h1{
+		font-size: 40px;
+		font-weight: lighter;
+	}
+	body{
+		background-image: url('images.jpeg');
+		background-repeat: no-repeat;
+		background-size: 100% 600%;
+	}
+
+</style>
+<body>
+	 <!-- debut navigation -->
+        <h1>ODC/DEV DATA COHORTE 5</h1>
+        <hr />
+        <div id="stylefive">
+          <ul>
+            <li><a href="../index.html" class="current">ACCEUIL</a></li>
+            <li><a href="../TP1JS/index.html">TP1</a></li>
+            <li><a href="../TP2JS/index.html">TP2</a></li>
+            <li><a href="../TP3JS/index.html">TP3</a></li>
+            <li><a href="../TP4JS/index.html">TP4</a></li>
+            <li><a href="../TP5JS/index.html">TP5</a></li>
+             <li><a href="../TP6JS/index.html">TP6</a></li>
+            <li><a rel="nofollow" href="../TP7JS/index.html">TP7</a></li>
+          </ul>
+        </div>
+
+<div class="conteneur">
+	<h1>On sera en 2024 dans</h1>
+	<div id="lireDate">
+		<div id="jours" style="float: left; padding: 0.5em; padding-left: 500px;">
+		</div>
+		<div id="heures" style="float: left;padding: 0.5em;">
+		</div>
+		<div id="minutes" style="float: left;padding: 0.5em;">
+		</div>
+		<div id="secondes" style="float: left;padding: 0.5em;">
+		</div>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	let newLine = document.createElement('p')
+	newLine.style.fontSize = '12px'
+	newLine.style.fontWeight = 'lighter'
+	let newLine2 = document.createElement('p')
+	newLine2.style.fontSize = '12px'
+	newLine2.style.fontWeight = 'lighter'
+	let newLine3 = document.createElement('p')
+	newLine3.style.fontSize = '12px'
+	newLine3.style.fontWeight = 'lighter'
+	let newLine4 = document.createElement('p')
+	newLine4.style.fontSize = '12px'
+	newLine4.style.fontWeight = 'lighter'
+
+	function lireHeure() {
+	 	setInterval(function(){
+	 		let m1 = document.getElementById('jours');
+	 		let m2 = document.getElementById('heures');
+	 		let m3 = document.getElementById('minutes');
+	 		let m4 = document.getElementById('secondes');
+	 		let dateRef = new Date(2024,0,1, 0,0,0)
+			let dateact = new Date()
+
+			let d1 = dateRef.getTime()
+			let d2 = dateact.getTime()
+			let date = d1 - d2 //jours restants en ms
+
+			let intSecs= date/1000
+			let intMins =intSecs /60
+			let intHeures = intMins/60
+			let intJours= intHeures/24
+			let intJours2= parseInt(intHeures/24)
+			let njr = intJours- intJours2
+			intHeures =njr * 60
+			intHeures2 = parseInt(intHeures)
+			let nmr= intHeures - intHeures2
+			intMins = nmr * 60
+			intMins2 = parseInt(intMins)
+			let nsr = intMins - intMins2
+			intSecs = nsr* 60
+			intSecs2 = parseInt(intSecs)
+
+	 		m1.innerHTML = '-'+intJours2
+	 		newLine.innerHTML = 'jours'
+	 		m1.appendChild(newLine)
+
+	 		m2.innerHTML = '0-'+intHeures2
+	 		newLine2.innerHTML = 'heures'
+	 		m2.appendChild(newLine2)
+
+	 		m3.innerHTML = '0-'+intMins2
+	 		newLine3.innerHTML = 'minutes'
+	 		m3.appendChild(newLine3)
+
+	 		m4.innerHTML = '0-'+intSecs2;
+	 		newLine4.innerHTML = 'secondes'
+	 		m4.appendChild(newLine4)
+
+	 	},1000)
+	 };
+	 lireHeure();
+
+</script>
+</body>
+</html>
