@@ -31,7 +31,9 @@ const renderMovie = (movie) => {
 
 	const movieTitle = document.createElement("p");
 	movieTitle.classList.add("title");
+	movieTitle.style.fontSize = '18px';
 	movieTitle.innerText = movie.title;
+
 
 	const divCategory = document.createElement("div");
 	divCategory.classList.add("category");
@@ -60,7 +62,7 @@ const renderMovie = (movie) => {
 
 	const movieSinopse = document.createElement("p");
 	movieSinopse.classList.add("sinopse")
-	movieSinopse.innerText = movie.overview ? movie.overview : "description!";
+	movieSinopse.innerText = movie.overview ? movie.overview : "Pas de description!";
 
 	divStars.appendChild(iconStars);
 	divStars.appendChild(ranking);
