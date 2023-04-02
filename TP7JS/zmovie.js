@@ -56,11 +56,11 @@ const renderMovie = (movie) => {
 	imgHeart.setAttribute("src", isFavorite(movie.id) ? "./assets/heart-full.svg" : "./assets/heart-empty.svg");
 
 	const textButtonFavorite = document.createElement("p");
-	textButtonFavorite.innerText = "Favoritar"
+	textButtonFavorite.innerText = "Favori"
 
 	const movieSinopse = document.createElement("p");
 	movieSinopse.classList.add("sinopse")
-	movieSinopse.innerText = movie.overview ? movie.overview : "Sem descrição!";
+	movieSinopse.innerText = movie.overview ? movie.overview : "description!";
 
 	divStars.appendChild(iconStars);
 	divStars.appendChild(ranking);
@@ -191,7 +191,7 @@ const getMoviesFavorite = (arrayIDs) => {
 }
 
 const checkingFavoriteMovies = () => {
-	const alertText = "Ops! Infelizmente você ainda não favoritou nenhum filme, para usar essa funcionalidade, pesquise seus filmes preferidos e clique em favoritar e tente novamente!";
+	const alertText = "Ops! pour utiliser cette fonctionnalité, recherchez vos films préférés et cliquez sur favori et réessayez !";
 	let arrayIDs = localStorage.getItem("idMovie");
 	arrayIDs = JSON.parse(arrayIDs);
 	arrayIDs.length > 0 ? getMoviesFavorite(arrayIDs) : alert(alertText);
