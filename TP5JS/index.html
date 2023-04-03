@@ -12,7 +12,7 @@
 </head>
 <body>
     <!-- debut navigation -->
-        <h1>ODC/DEV DATA COHORTE 5</h1>
+        <h1 class="covertitle">ODC/DEV DATA COHORTE 5</h1>
         <hr />
         <div id="stylefive">
           <ul>
@@ -31,7 +31,7 @@
 
         <br>
         <!-- fin menu navigation -->
-    <div id = "quizApp">
+    <div id ="quizApp">
         <div class="question-card" 
             v-for="(q, iq) in questions"  
             v-if="iq === currentIndex">
@@ -56,10 +56,10 @@
         <div class="question-card" 
             v-if="currentIndex === questions.length"
             >
-            <h4>Resultat:</h4>
-            <p>Vous avez trouve: {{ reponsesCorrectes() }} / {{ questions.length }} questions </p>
+            <p><h1>Vous avez trouve: {{ reponsesCorrectes() }} / {{ questions.length }} questions </h1></p>
+            <br><br><br><br><br><br>
             <button> <a href="index.html" class="text-light">ReJouer</a> </button>
-            <div v-if="incorrectAnswersIndex.size > 0">
+            <!-- <div v-if="incorrectAnswersIndex.size > 0">
                 <h4> Reponses Incorrectes: </h4>
 
                 <div class="answer-card" 
@@ -69,7 +69,7 @@
                     <p> Votre Reponse: {{ questions[idx].choix[answers[idx]] }} </p>
                     <p> Reponse Correcte: {{ questions[idx].choix[questions[idx].correct] }} </p>
                 </div>
-            </div>
+            </div> -->
         </div>
 
 
