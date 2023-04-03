@@ -5,14 +5,7 @@ let search = document.querySelector("#movie-name");
 let isInputCheck = false;
 let patternRecherche = "default";
 
-const estFavori = (id) => {
-	let IDs = localStorage.getItem("idMovie");
-	if (IDs !== null) {
-		IDs = JSON.parse(IDs)
-		return IDs.includes(id) ? true : false;
-	}
-	return false;
-}
+
 let compteur = 0;
 const afficherFilm = (movie) => {
 	compteur ++;
@@ -34,23 +27,33 @@ const afficherFilm = (movie) => {
 	divDescription.classList.add("description");
 
 	const movieTitle = document.createElement("p");
-	movieTitle.classList.add("title");
-	movieTitle.style.fontSize = '20px';
-	movieTitle.style.display = 'flex'
+	movieTitle.classList.add("mytitle");
+	movieTitle.style.fontSize = '14px';
+	movieTitle.style.fontWeight = 'bolder';
+	movieTitle.style.float = 'left'
 	movieTitle.innerText = movie.title;
 
 
 	const divCategory = document.createElement("div");
 	divCategory.classList.add("category");
+	divCategory.style.float='right'
+	divCategory.style.backgroundColor = '#24274D'
+	divCategory.style.marginRight = '20px'
 
 	const divStars = document.createElement("div");
 	divStars.classList.add("stars");
 	const starClasse = document.getElementById('stars');
-	// starClasse.style.backgroundColor = '';
-
 
 	const ranking = document.createElement("p");
-	ranking.innerText = Number(movie.vote_average).toFixed(1);
+	let rang = Number(movie.vote_average).toFixed(1);
+	if (rang > 7) {
+		ranking.style.color='green'
+		ranking.style.fontWeight = 'bolder';
+	}else{
+		ranking.style.color='orange'
+		ranking.style.fontWeight = 'bolder';
+	}
+	ranking.innerText = rang
 
 
 	const movieSinopse = document.createElement("p");
@@ -70,16 +73,8 @@ const afficherFilm = (movie) => {
 
 	moviesContainer.appendChild(movieCard);
 
-	// mcards = document.querySelectorAll('movie-card'){
-	// 	if (compteur == 4) {
-	// 		mcards.forEach(mc => ()=> {
-	// 	    	mcards.removeAttributes('col')
-	// 	    });
-	// 	}
-	// }
 
 }
-
 
 
 const effacerListeFilm = () => moviesContainer.innerHTML = "";
@@ -94,7 +89,7 @@ const getMovies = async (search) => {
 		try {
 			const url = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1";
 			const movies = await fetch(url).then(res => res.json());
-			const data = await movies.results;
+			const data   = await movies.results;
 
 			patternRecherche = "default";
 
@@ -139,8 +134,6 @@ const stockerFilm = (id) => {
 
 const rafraichirPage = (idMovies) => {
 	if (idMovies.length > 0) {
-		return voirFavori();
-	} else {
 		isCheck = false;
 		check.checked = false;
 		return getMovies(patternRecherche);
@@ -167,12 +160,7 @@ const siFilmExiste = (id) => {
 	return false
 }
 
-const gererFavori = async (id) => {
-	if (!siFilmExiste(id)) {
-		return stockerFilm(id);
-	}
-	afficherFilmStocke(id)
-}
+
 
 const getMoviebyID = async (id) => {
 	try {
@@ -184,29 +172,6 @@ const getMoviebyID = async (id) => {
 	}
 }
 
-const getMoviesFavorite = (arrayIDs) => {
-	let arrayMovies = []
-	arrayIDs.map(id => {
-		arrayMovies.push(getMoviebyID(id))
-	});
-	arrayMovies = Promise.all(arrayMovies).then(favoriteMovies => favoriteMovies)
-	arrayMovies.then(favoriteMovies => ajouterFilmListe(favoriteMovies))
-}
-
-const voirFavori = () => {
-	const alertText = "Ops! pour utiliser cette fonctionnalité, recherchez vos films préférés et cliquez sur favori et réessayez !";
-	let arrayIDs = localStorage.getItem("idMovie");
-	arrayIDs = JSON.parse(arrayIDs);
-	arrayIDs.length > 0 ? getMoviesFavorite(arrayIDs) : alert(alertText);
-}
-
-check.addEventListener("change", () => {
-	isCheck = !isCheck;
-	if (isCheck) {
-		return voirFavori();
-	}
-	return getMovies(patternRecherche);
-});
 
 window.addEventListener("keydown", (event) => {
 	if (event.key === "Enter") {
@@ -225,6 +190,3 @@ let mcard= document.querySelectorAll('title')
 		movieSinopse.style.display = 'block';
     }));
 
-// mcard.onmouseover = function() {
-//   movieSinopse.style.display = 'block';
-// }
