@@ -1,8 +1,13 @@
 
 		.container{
 			background-color: lightgrey;
+			width: 1000px;
 			padding-top: 10px;
 			height: 440px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
 		}
 		#left {
 			float: left;
@@ -34,8 +39,8 @@
 		}
 		
 		button {
-			margin-top: 100px;
-			margin-left: 100px;
+			margin-top: 50px;
+			margin-left: 50px;
 			font-size: 1em;
 			padding: 5px 10px;
 			border-radius: 5px;
@@ -49,3 +54,83 @@
 			cursor: default;
 		}
 	
+	@media screen and (max-width: 768px){
+		.container{
+			background-color: lightgrey;
+			width: 300px;
+			padding-top: 5px;
+			height: 200px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		#left {
+			float: left;
+			width: 40%;
+			height: 300px;
+			padding: 10px;
+			margin-left: 10px;
+			background-color: white;
+		}
+		
+		#right {
+			float: right;
+			width: 40%;
+			height: 410px;
+			padding: 10px;
+			margin-right: 10px;
+			background-color: white;
+		}
+
+	}
+	@media screen and (max-width: 1000px){
+		.container{
+			background-color: lightgrey;
+			width: 95%;
+			padding-top: 10px;
+			height: 200px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		#left {
+			float: left;
+			width: 30%;
+			height: 80%;
+			padding: 10px;
+			margin-left: 10px;
+			background-color: white;
+		}
+		
+		#right {
+			float: right;
+			width: 30%;
+			height: 80%;
+			padding: 10px;
+			margin-right: 10px;
+			background-color: white;
+		}
+		button {
+			margin-top: 50px;
+			margin-left: 50px;
+			font-size: 0.5em;
+			padding: 5px 10px;
+			border-radius: 5px;
+			border: 1px solid black;
+			background-color: #fff;
+			cursor: pointer;
+		}
+		
+		button:disabled {
+			background-color: #ccc;
+			cursor: default;
+		}
+		p{
+			font-size: 10px;
+		}
+
+	}
