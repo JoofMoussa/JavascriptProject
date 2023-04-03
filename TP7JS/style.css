@@ -122,6 +122,8 @@ main .movie .movie-container .movie-card {
 	width: 20.5rem;
 	height: 31.5rem;
 	float: left;
+	margin: 0 50px;
+	margin-top: 70px;
 	background: var(--card-color);
 	box-shadow: 2.0524rem 1.5343rem 4.9375rem rgba(0, 0, 0, 0.15), 1.4928rem 1.1159rem 3.328rem rgba(0, 0, 0, 0.121406), 1.039rem 0.7767rem 2.1524rem rgba(0, 0, 0, 0.10125), 0.6815rem 0.5094rem 1.3356rem rgba(0, 0, 0, 0.0867188), 0.4105rem 0.3069rem 0.8023rem rgba(0, 0, 0, 0.075), 0.2165rem 0.1618rem 0.4774rem rgba(0, 0, 0, 0.0632813), 0.0898rem 0.0671rem 0.2854rem rgba(0, 0, 0, 0.04875), 0.0208rem 0.0156rem 0.1514rem rgba(0, 0, 0, 0.0285938);
 	border-radius: 0.5rem;
@@ -135,15 +137,15 @@ main .movie .movie-container .movie-card .info {
 
 main .movie .movie-container .movie-card .info .movie-cover {
 	min-width: 10.6875rem;
-	width: 19.5rem;
+	width: 21.5rem;
 	height: 28rem;
 	object-fit: cover;
 }
 
 main .movie .movie-container .movie-card .info .description {
 	float: left;
-	width: 19.5rem;
-	height: 54px;
+	width: 21.5rem;
+	height: 90px;
 	background-color: #404477;
 }
 
