@@ -6,7 +6,7 @@
 	#corps{
 		width: 100%;
 		padding-top: 50px;
-		max-width: 1800px;
+/*		max-width: 1800px;*/
 
 	}
 	.posbutton{
@@ -21,22 +21,21 @@
 	}
 	.modal{
 	height: 400px; 
-	width: 400px;
+	width: 350px;
 	padding: 0 20px;
-	@media (max-width: 400px) {}
 
 	}	
 	.modal-header{
 	opacity: 0.7;
 	height : 35px; 
-	width : 402px; 
+	width : 352px; 
 	background-color: #9EC962;
 	border: 1px solid green;
         border-radius: 5px;
         box-shadow: 5px 5px 5px gold;
 	}
 	textarea{
-	 width: 398px;
+	 width: 348px;
 	 height: 300px;
 	 border: 1px solid green;
         border-radius: 5px;
@@ -74,3 +73,19 @@
 	 .text-danger{
 	 	color: red;
 	 }
+@media screen and (max-width:768px){
+	h1{
+		font-size: 12px;
+	}
+	.posbutton{
+		text-align: center;
+		padding-top: 10px;
+	}
+	.mybutton{
+		background-color: #9EC962;
+		color: white;
+		border-radius: 10px;
+		font-size: 15px;
+		border: 1 px snow black;
+	}
+}

@@ -16,13 +16,13 @@
 		// nouveauParagraphe.classList.add('pt400');
 
 		// boite.classList.add('entete');
-		boite.width = "400";
+		boite.width = "350";
 		boite.height = "400";
 
 		const entete = document.createElement('div');
 		entete.classList.add('modal-header');
 		entete.height = "35"; 
-		entete.width = "400"; 
+		entete.width = "350"; 
 		entete.style.backgroundColor = "#9EC962";
 
 		// Créer les icônes "edit" et "corbeille"
