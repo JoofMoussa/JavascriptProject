@@ -25,7 +25,7 @@
 	).concat(
 	  TabMinMax(123, 126)
 	);
-	alert('Pour desactiver le bouton\n1=>Veuillez Choisir au moins une Option\n2=>La taille doit etre superieur a 15 et inferieur a 20')
+	// alert('Pour desactiver le bouton\n1=>Veuillez Choisir au moins une Option\n2=>La taille doit etre superieur a 15 et inferieur a 20')
 	function misAjour() {
 
 		  if (minusculesInclusval.checked || chiffreInclusval.checked || majusculesInclusval.checked || specialInclusval.checked || chaineMdp.value.length > 15) {
