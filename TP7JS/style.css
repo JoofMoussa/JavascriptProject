@@ -31,17 +31,18 @@ header h1 {
 
 main {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
-	padding: 0 1rem;
+/*	padding: 0 1rem;*/
 }
 
 main .search {
 	width: 100%;
-	display: flex;
-	flex-direction: column;
+	/*display: flex;
+	flex-direction: column;*/
 	align-items: center;
-	gap: 1.875rem;
+	float: left;
+/*	gap: 1.875rem;*/
 }
 
 
@@ -82,6 +83,7 @@ main .search .box-input .btn {
 	border: none;
 	background: transparent;
 	cursor: pointer;
+	text
 }
 
 main .search .box-input .btn .icon {
@@ -90,10 +92,11 @@ main .search .box-input .btn .icon {
 }
 
 main .search .select-favorite {
-	display: flex;
+/*	display: flex;*/
+	float: left;
 	flex-direction: row;
 	align-items: center;
-	gap: 0.875rem;
+/*	gap: 0.875rem;*/
 }
 
 main .search .select-favorite label {
@@ -109,49 +112,39 @@ main .movie {
 }
 
 main .movie .movie-container {
+	float: left;
 	width: 100%;
-	display: flex;
-	flex-direction: column;
 	align-items: center;
-	gap: 3rem;
-	padding: 0 1rem;
+	padding: 0 3rem;
 }
 
 main .movie .movie-container .movie-card {
-	width: 76.5rem;
-	height: auto;
-	padding: 1.5rem 2.875rem;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: flex-start;
-	gap: 7.8125rem;
-
+	width: 20.5rem;
+	height: 31.5rem;
+	float: left;
 	background: var(--card-color);
 	box-shadow: 2.0524rem 1.5343rem 4.9375rem rgba(0, 0, 0, 0.15), 1.4928rem 1.1159rem 3.328rem rgba(0, 0, 0, 0.121406), 1.039rem 0.7767rem 2.1524rem rgba(0, 0, 0, 0.10125), 0.6815rem 0.5094rem 1.3356rem rgba(0, 0, 0, 0.0867188), 0.4105rem 0.3069rem 0.8023rem rgba(0, 0, 0, 0.075), 0.2165rem 0.1618rem 0.4774rem rgba(0, 0, 0, 0.0632813), 0.0898rem 0.0671rem 0.2854rem rgba(0, 0, 0, 0.04875), 0.0208rem 0.0156rem 0.1514rem rgba(0, 0, 0, 0.0285938);
 	border-radius: 0.5rem;
 }
 
 main .movie .movie-container .movie-card .info {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
-	gap: 4rem;
+	/*flex-direction: row;
+	justify-content: space-between;*/
+/*	gap: 4rem;*/
 }
 
 main .movie .movie-container .movie-card .info .movie-cover {
-	min-width: 8.6875rem;
-	height: 8.6875rem;
-	border-radius: 4.3438rem;
+	min-width: 10.6875rem;
+	width: 19.5rem;
+	height: 28rem;
 	object-fit: cover;
-	filter: drop-shadow(1.25rem 1.25rem 1.875rem rgba(0, 0, 0, 0.3));
 }
 
 main .movie .movie-container .movie-card .info .description {
-	display: flex;
-	flex-direction: column;
-	gap: 1.5625rem;
+	float: left;
+	width: 19.5rem;
+	height: 54px;
+	background-color: #404477;
 }
 
 main .movie .movie-container .movie-card .info .description {
@@ -162,28 +155,29 @@ main .movie .movie-container .movie-card .info .description {
 }
 
 main .movie .movie-container .movie-card .info .description .category {
-	display: flex;
-	flex-direction: row;
+	/*display: flex;
+	flex-direction: row;*/
+	float: left;
 	align-items: center;
-	gap: 2.8125rem;
+/*	gap: 2.8125rem;*/
 }
 
 main .movie .movie-container .movie-card .info .description .category .stars {
-	display: flex;
+	/*display: flex;
 	flex-direction: row;
-	gap: 0.75rem;
-
+	gap: 0.75rem;*/
+	float: left;
 	font-size: 1.125rem;
 	line-height: 1.375rem;
-
 	color: var(--white-color);
 }
 
 
 main .movie .movie-container .movie-card .info .description .category .favorite {
-	display: flex;
-	flex-direction: row;
-	gap: 0.75rem;
+	/*display: flex;
+	flex-direction: row;*/
+/*	gap: 0.75rem;*/
+	float: left;	
 }
 
 main .movie .movie-container .movie-card .info .description .category .favorite .btn-favorite {
@@ -194,14 +188,14 @@ main .movie .movie-container .movie-card .info .description .category .favorite 
 	background: transparent;
 	border: none;
 	cursor: pointer;
-
-	display: flex;
-	gap: 0.75rem;
+	float: left;
+	/*display: flex;
+	gap: 0.75rem;*/
 }
 
 main .movie .movie-container .movie-card .info .description .category .favorite .btn-favorite img {
-	height: 1.1395rem;
-	width: 1.3064rem;
+	height: 2rem;
+	width: 2rem;
 }
 
 main .movie .movie-container .movie-card .sinopse {
@@ -209,4 +203,13 @@ main .movie .movie-container .movie-card .sinopse {
 	font-size: 1.125rem;
 	line-height: 2rem;
 	color: var(--gray-text-color);
+}
+.row {
+     display: flex;
+	 }
+
+.col {
+	
+	float: left;
+/*	padding: 20px;*/
 }

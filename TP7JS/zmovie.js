@@ -13,8 +13,12 @@ const estFavori = (id) => {
 	}
 	return false;
 }
-
+let compteur = 0;
 const afficherFilm = (movie) => {
+	compteur ++;
+	newRow= document.createElement('div');
+	newRow.classList.add('row');
+
 	const movieCard = document.createElement("div");
 	movieCard.classList.add("movie-card")
 
@@ -31,7 +35,8 @@ const afficherFilm = (movie) => {
 
 	const movieTitle = document.createElement("p");
 	movieTitle.classList.add("title");
-	movieTitle.style.fontSize = '18px';
+	movieTitle.style.fontSize = '20px';
+	movieTitle.style.display = 'flex'
 	movieTitle.innerText = movie.title;
 
 
@@ -40,51 +45,47 @@ const afficherFilm = (movie) => {
 
 	const divStars = document.createElement("div");
 	divStars.classList.add("stars");
+	const starClasse = document.getElementById('stars');
+	// starClasse.style.backgroundColor = '';
 
-	const iconStars = document.createElement("img")
-	iconStars.setAttribute("src", "./assets/star.svg");
 
 	const ranking = document.createElement("p");
 	ranking.innerText = Number(movie.vote_average).toFixed(1);
 
-	const divFavorite = document.createElement("div");
-	divFavorite.classList.add("favorite");
-
-	const buttonFavorite = document.createElement("button");
-	buttonFavorite.classList.add("btn-favorite");
-	buttonFavorite.setAttribute("onclick", `gererFavori(${movie.id})`);
-
-	const imgHeart = document.createElement("img");
-	imgHeart.setAttribute("src", estFavori(movie.id) ? "./assets/heart-full.svg" : "./assets/heart-empty.svg");
-
-	const textButtonFavorite = document.createElement("p");
-	textButtonFavorite.innerText = "Favori"
 
 	const movieSinopse = document.createElement("p");
 	movieSinopse.classList.add("sinopse")
 	movieSinopse.innerText = movie.overview ? movie.overview : "Pas de description!";
 
-	divStars.appendChild(iconStars);
 	divStars.appendChild(ranking);
-	buttonFavorite.appendChild(imgHeart);
-	buttonFavorite.appendChild(textButtonFavorite);
-	divFavorite.appendChild(buttonFavorite)
+
 	divCategory.appendChild(divStars);
-	divCategory.appendChild(divFavorite)
 	divDescription.appendChild(movieTitle);
 	divDescription.appendChild(divCategory);
 	divInfo.appendChild(movieCover);
 	divInfo.appendChild(divDescription);
 	movieCard.appendChild(divInfo);
 	movieCard.appendChild(movieSinopse)
+	movieSinopse.style.display='none'
 
 	moviesContainer.appendChild(movieCard);
+
+	// mcards = document.querySelectorAll('movie-card'){
+	// 	if (compteur == 4) {
+	// 		mcards.forEach(mc => ()=> {
+	// 	    	mcards.removeAttributes('col')
+	// 	    });
+	// 	}
+	// }
+
 }
 
-const clearMovieContainer = () => moviesContainer.innerHTML = "";
 
-const addMoviesInContainer = (movies) => {
-	clearMovieContainer();
+
+const effacerListeFilm = () => moviesContainer.innerHTML = "";
+
+const ajouterFilmListe = (movies) => {
+	effacerListeFilm();
 	movies.map(movie => afficherFilm(movie));
 }
 
@@ -97,7 +98,7 @@ const getMovies = async (search) => {
 
 			patternRecherche = "default";
 
-			return addMoviesInContainer(data);
+			return ajouterFilmListe(data);
 		} catch (error) {
 			console.log(error);
 		}
@@ -105,20 +106,20 @@ const getMovies = async (search) => {
 	return getMoviesByName(search);
 }
 
-const getMoviesByName = async (movieName) => {
-	patternRecherche = movieName;
+const getMoviesByName = async (nomFilm) => {
+	patternRecherche = nomFilm;
 	try {
-		const url = `https://api.themoviedb.org/3/search/movie?api_key=c01784035bbc1fa42a613a52fd09e823&language=fr&query=${movieName}&page=1&include_adult=false`;
+		const url = `https://api.themoviedb.org/3/search/movie?api_key=c01784035bbc1fa42a613a52fd09e823&language=fr&query=${nomFilm}&page=1&include_adult=false`;
 		const movies = await fetch(url).then(res => res.json());
 		const data = movies.results;
 
-		addMoviesInContainer(data);
+		ajouterFilmListe(data);
 	} catch (error) {
 		console.log(error);
 	}
 }
 
-const handleMovieSearch = () => {
+const gererRechercheFilm = () => {
 	if (search.value !== "") {
 		getMoviesByName(search.value);
 		return search.value = "";
@@ -189,7 +190,7 @@ const getMoviesFavorite = (arrayIDs) => {
 		arrayMovies.push(getMoviebyID(id))
 	});
 	arrayMovies = Promise.all(arrayMovies).then(favoriteMovies => favoriteMovies)
-	arrayMovies.then(favoriteMovies => addMoviesInContainer(favoriteMovies))
+	arrayMovies.then(favoriteMovies => ajouterFilmListe(favoriteMovies))
 }
 
 const voirFavori = () => {
@@ -211,9 +212,19 @@ window.addEventListener("keydown", (event) => {
 	if (event.key === "Enter") {
 		console.log(search.value)
 		if (search.value !== "") {
-			handleMovieSearch();
+			gererRechercheFilm();
 		}
 	}
 });
 
 getMovies(patternRecherche);
+
+let mcard= document.querySelectorAll('title')
+
+	mcard.forEach(mc => mc.addEventListener('click', ()=> {
+		movieSinopse.style.display = 'block';
+    }));
+
+// mcard.onmouseover = function() {
+//   movieSinopse.style.display = 'block';
+// }
