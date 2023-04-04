@@ -16,7 +16,7 @@
 		notes.appendChild(nouveauDiv);
 		setTimeout( ()=>{
 			notes.removeChild(nouveauDiv);
-		}, 5000);
+		}, 1000);
     }
 
     btns.forEach(btn => btn.addEventListener('click', ()=> {
