@@ -1,16 +1,23 @@
 const moviesContainer = document.querySelector("#movie-container");
-const check = document.querySelector("#check");
-let isCheck = false;
+// const check = document.querySelector("#check");
+// let isCheck = false;
 let search = document.querySelector("#movie-name");
 let isInputCheck = false;
 let patternRecherche = "default";
 
 
+
 let compteur = 0;
 const afficherFilm = (movie) => {
 	compteur ++;
-	newRow= document.createElement('div');
-	newRow.classList.add('row');
+	// if (Number(window.scrollY)==459) {
+  	// 	// window.scroll(0, 0); // reset the scroll position to the top left of the document.
+  	// 	window.scrollByPages(2);
+	// }
+
+	// window.scrollByPages(1);
+	// newRow= document.createElement('div');
+	// newRow.classList.add('row');
 
 	const movieCard = document.createElement("div");
 	movieCard.classList.add("movie-card")
@@ -28,9 +35,11 @@ const afficherFilm = (movie) => {
 
 	const movieTitle = document.createElement("p");
 	movieTitle.classList.add("mytitle");
-	movieTitle.style.fontSize = '14px';
+	movieTitle.style.fontSize = '18px';
 	movieTitle.style.fontWeight = 'bolder';
 	movieTitle.style.float = 'left'
+	movieTitle.style.width='250px'
+	movieTitle.style.wordBreak = 'break-all'
 	movieTitle.innerText = movie.title;
 
 
@@ -38,7 +47,7 @@ const afficherFilm = (movie) => {
 	divCategory.classList.add("category");
 	divCategory.style.float='right'
 	divCategory.style.backgroundColor = '#24274D'
-	divCategory.style.marginRight = '20px'
+	divCategory.style.marginRight = '18px'
 
 	const divStars = document.createElement("div");
 	divStars.classList.add("stars");
@@ -49,16 +58,24 @@ const afficherFilm = (movie) => {
 	if (rang > 7) {
 		ranking.style.color='green'
 		ranking.style.fontWeight = 'bolder';
-	}else{
+	}else if (rang < 3) {
+		ranking.style.color='red'
+		ranking.style.fontWeight = 'bolder';
+	}
+	else{
 		ranking.style.color='orange'
 		ranking.style.fontWeight = 'bolder';
 	}
 	ranking.innerText = rang
 
 
-	const movieSinopse = document.createElement("p");
+	const movieSinopse = document.createElement("span");
 	movieSinopse.classList.add("sinopse")
-	movieSinopse.innerText = movie.overview ? movie.overview : "Pas de description!";
+	movieSinopse.style.backgroundColor='white'
+	movieSinopse.style.textAlign='left'
+	movieSinopse.innerHTML = '<b>'+'Overview: '+'</b>'+'<br><br>'+movie.overview 
+	movieSinopse.classList.add('hide')
+
 
 	divStars.appendChild(ranking);
 
@@ -66,15 +83,35 @@ const afficherFilm = (movie) => {
 	divDescription.appendChild(movieTitle);
 	divDescription.appendChild(divCategory);
 	divInfo.appendChild(movieCover);
+	divInfo.appendChild(movieSinopse);
 	divInfo.appendChild(divDescription);
+
 	movieCard.appendChild(divInfo);
-	movieCard.appendChild(movieSinopse)
-	movieSinopse.style.display='none'
-
+	// movieCard.appendChild(movieSinopse)
 	moviesContainer.appendChild(movieCard);
-
+	
 
 }
+
+let maxY = window.scrollMaxY;
+// maxY =Number(456)
+window.scrollTo(0, maxY);
+
+window.onscroll = function() {
+	myFunction()
+};
+
+function myFunction() {
+  if (document.documentElement.scrollTop == 550) {
+      // document.getElementById("movie-container").classList.add("slideUp");
+  	window.body.classList.add("slideUp");
+
+  }
+   // window.scroll(0, 0)
+
+}
+
+
 
 
 const effacerListeFilm = () => moviesContainer.innerHTML = "";
@@ -134,8 +171,8 @@ const stockerFilm = (id) => {
 
 const rafraichirPage = (idMovies) => {
 	if (idMovies.length > 0) {
-		isCheck = false;
-		check.checked = false;
+		// isCheck = false;
+		// check.checked = false;
 		return getMovies(patternRecherche);
 	}
 }

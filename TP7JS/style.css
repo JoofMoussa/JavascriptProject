@@ -29,21 +29,28 @@ header h1 {
 	color: var(--white-color);
 }
 
-main {
-	display: flex;
+/*main {
+	float: left;
+	/*display: flex;
 	flex-direction: row;
-	align-items: center;
-/*	padding: 0 1rem;*/
+	align-items: center;*/
+/*	padding: 0 1rem;
+}*/
+
+nav main .navbar-brand .brand {
+	float: left;
+}
+nav main .navbar-brand .brand .active .search{
+	float: right;
 }
 
-main .search {
+/*main .search {
 	width: 100%;
 	/*display: flex;
 	flex-direction: column;*/
-	align-items: center;
-	float: left;
-/*	gap: 1.875rem;*/
-}
+/*	float: right;*/
+/*	gap: 1.875rem;
+}*/
 
 
 main .search .box-input {
@@ -52,16 +59,14 @@ main .search .box-input {
 	background: rgba(255, 255, 255, .2);
 	border-radius: 0.5rem;
 	padding: 1.625rem 1.5rem;
-
-	display: flex;
-	flex-direction: row;
+	float: right;
 	align-items: center;
 }
 
 main .search .box-input input {
 	width: 18.3125rem;
 	height: 1.375rem;
-
+	float: right;
 	outline: none;
 	background: transparent;
 	border: none;
@@ -70,7 +75,7 @@ main .search .box-input input {
 	font-weight: 500;
 	font-size: 1.125rem;
 	line-height: 1.375rem;
-	flex-grow: 1;
+/*	flex-grow: 1;*/
 }
 
 main .search .box-input input::placeholder {
@@ -83,7 +88,7 @@ main .search .box-input .btn {
 	border: none;
 	background: transparent;
 	cursor: pointer;
-	text
+	float: right;
 }
 
 main .search .box-input .btn .icon {
@@ -119,11 +124,11 @@ main .movie .movie-container {
 }
 
 main .movie .movie-container .movie-card {
-	width: 20.5rem;
+	width: 22rem;
 	height: 31.5rem;
 	float: left;
 	margin: 0 50px;
-	margin-top: 70px;
+	margin-top: 100px;
 	background: var(--card-color);
 	box-shadow: 2.0524rem 1.5343rem 4.9375rem rgba(0, 0, 0, 0.15), 1.4928rem 1.1159rem 3.328rem rgba(0, 0, 0, 0.121406), 1.039rem 0.7767rem 2.1524rem rgba(0, 0, 0, 0.10125), 0.6815rem 0.5094rem 1.3356rem rgba(0, 0, 0, 0.0867188), 0.4105rem 0.3069rem 0.8023rem rgba(0, 0, 0, 0.075), 0.2165rem 0.1618rem 0.4774rem rgba(0, 0, 0, 0.0632813), 0.0898rem 0.0671rem 0.2854rem rgba(0, 0, 0, 0.04875), 0.0208rem 0.0156rem 0.1514rem rgba(0, 0, 0, 0.0285938);
 	border-radius: 0.5rem;
@@ -137,49 +142,40 @@ main .movie .movie-container .movie-card .info {
 
 main .movie .movie-container .movie-card .info .movie-cover {
 	min-width: 10.6875rem;
-	width: 21.5rem;
-	height: 28rem;
+	width: 22rem;
+	height: 30rem;
 	object-fit: cover;
 }
 
 main .movie .movie-container .movie-card .info .description {
-	float: left;
-	width: 21.5rem;
-	height: 90px;
+	width: 22rem;
+	height: 95px;
 	background-color: #404477;
-}
-
-main .movie .movie-container .movie-card .info .description {
-	font-weight: 500;
+	font-weight: 400;
 	font-size: 1rem;
 	line-height: 1.375rem;
 	color: var(--white-color);
-	padding-top: 20px;
 }
 
+
+
 main .movie .movie-container .movie-card .info .description .category {
-	/*display: flex;
-	flex-direction: row;*/
+
 	float: left;
 	align-items: center;
-/*	gap: 2.8125rem;*/
 }
 
 main .movie .movie-container .movie-card .info .description .category .stars {
-	/*display: flex;
-	flex-direction: row;
-	gap: 0.75rem;*/
+
 	float: right;
-	font-size: 1.125rem;
-	line-height: 1.375rem;
+	font-size: 1.5rem;
+	line-height: 1.5rem;
 	color: var(--white-color);
 }
 
 
 main .movie .movie-container .movie-card .info .description .category .favorite {
-	/*display: flex;
-	flex-direction: row;*/
-/*	gap: 0.75rem;*/
+
 	float: right;	
 }
 
@@ -192,8 +188,7 @@ main .movie .movie-container .movie-card .info .description .category .favorite 
 	border: none;
 	cursor: pointer;
 	float: left;
-	/*display: flex;
-	gap: 0.75rem;*/
+
 }
 
 main .movie .movie-container .movie-card .info .description .category .favorite .btn-favorite img {
@@ -202,10 +197,25 @@ main .movie .movie-container .movie-card .info .description .category .favorite 
 }
 
 main .movie .movie-container .movie-card .sinopse {
-	font-weight: 500;
-	font-size: 1.5rem;
-	line-height: 2rem;
-	color: var(--gray-text-color);
+	font-weight: 350;
+/*	font-size: 1rem;*/
+	line-height: 1.6rem;
+	background-color: white;
+/*	color: var(--black-text-color);*/
+	margin-top: -400px;
+	opacity: 0.99;
+	width: 22rem;
+	height: 30rem;
+	padding: 0 20px;
+}
+
+.hide {
+  display: none;
+}
+
+main .movie .movie-container .movie-card :hover + .hide {
+  display: block;
+  cursor: pointer;
 }
 .row {
      display: flex;
@@ -214,5 +224,21 @@ main .movie .movie-container .movie-card .sinopse {
 .col {
 	
 	float: left;
-/*	padding: 20px;*/
+}
+
+.slideUp {
+  animation-name: slideUp;
+  animation-name: slideUp;
+  animation-duration: 1s;
+  animation-duration: 1s;
+  visibility: visible;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+  } 
+  100% {
+    transform: translateY(0%);
+  }
 }
