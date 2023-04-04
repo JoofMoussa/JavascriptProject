@@ -20,7 +20,7 @@
 		font-weight: lighter;
 	}
 	body{
-		background-image: url('images.jpeg');
+		background-image: url('image.jpg');
 		background-repeat: no-repeat;
 		background-size: 100% 600%;
 	}
@@ -58,6 +58,8 @@
 
 </div>
 
+
+
 <script type="text/javascript">
 	let newLine = document.createElement('p')
 	newLine.style.fontSize = '20px'
@@ -72,53 +74,52 @@
 	newLine4.style.fontSize = '20px'
 	newLine4.style.fontWeight = 'lighter'
 
-	function lireHeure() {
-	 	setInterval(function(){
-	 		let m1 = document.getElementById('jours');
-	 		let m2 = document.getElementById('heures');
-	 		let m3 = document.getElementById('minutes');
-	 		let m4 = document.getElementById('secondes');
-	 		let dateRef = new Date(2024,0,1, 0,0,0)
-			let dateact = new Date()
+	let m1 = document.getElementById('jours');
+	let m2 = document.getElementById('heures');
+	let m3 = document.getElementById('minutes');
+	let m4 = document.getElementById('secondes');
 
-			let d1 = dateRef.getTime()
-			let d2 = dateact.getTime()
-			let date = d1 - d2 //jours restants en ms
+	// Définir la date cible (1er janvier 2024 à 00:00:00)
+	const dateFinale = new Date("January 1, 2024 00:00:00").getTime();
 
-			let intSecs= date/1000
-			let intMins =intSecs /60
-			let intHeures = intMins/60
-			let intJours= intHeures/24
-			let intJours2= parseInt(intHeures/24)
-			let njr = intJours- intJours2
-			intHeures =njr * 60
-			intHeures2 = parseInt(intHeures)
-			let nmr= intHeures - intHeures2
-			intMins = nmr * 60
-			intMins2 = parseInt(intMins)
-			let nsr = intMins - intMins2
-			intSecs = nsr* 60
-			intSecs2 = parseInt(intSecs)
+	// Mettre à jour le compte à rebours chaque seconde
+	const interval = setInterval(() => {
 
-	 		m1.innerHTML = '-'+intJours2
+	  // Obtenir la date et l'heure actuelles
+	  const dateActuelle = new Date().getTime();
+
+	  // Calculer le temps restant en millisecondes
+	  const tempsRestant = dateFinale - dateActuelle;
+
+	  // Convertir le temps restant en jours, heures, minutes et secondes
+	  const jours = Math.floor(tempsRestant / (1000 * 60 * 60 * 24));
+	  const heures = Math.floor((tempsRestant % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	  const minutes = Math.floor((tempsRestant % (1000 * 60 * 60)) / (1000 * 60));
+	  const secondes = Math.floor((tempsRestant % (1000 * 60)) / 1000);
+
+
+    	m1.innerHTML = '-'+jours
 	 		newLine.innerHTML = 'jours'
 	 		m1.appendChild(newLine)
 
-	 		m2.innerHTML = '0-'+intHeures2
+	 		m2.innerHTML = '0-'+heures
 	 		newLine2.innerHTML = 'heures'
 	 		m2.appendChild(newLine2)
 
-	 		m3.innerHTML = '0-'+intMins2
+	 		m3.innerHTML = '0-'+minutes
 	 		newLine3.innerHTML = 'minutes'
 	 		m3.appendChild(newLine3)
 
-	 		m4.innerHTML = '0-'+intSecs2;
+	 		m4.innerHTML = '0-'+secondes;
 	 		newLine4.innerHTML = 'secondes'
 	 		m4.appendChild(newLine4)
 
-	 	},1000)
-	 };
-	 lireHeure();
+  // Arrêter le compte à rebours une fois que la date cible est atteinte
+  if (tempsRestant <= 0) {
+    clearInterval(interval);
+    document.getElementById("countdown").innerHTML = "Le compte à rebours est terminé !";
+  }
+}, 1000);
 
 </script>
 </body>
