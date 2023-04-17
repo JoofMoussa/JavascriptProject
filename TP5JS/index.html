@@ -1,80 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Quiz</title>
-    <link rel="stylesheet" type="text/css" href="../styles.css">
+    <title>Quiz Javascript</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="script.js" defer></script>
 </head>
+
 <body>
-    <!-- debut navigation -->
-        <h1 class="covertitle">ODC/DEV DATA COHORTE 5</h1>
-        <hr />
-        <div id="stylefive">
-          <ul>
-            <li><a href="../index.html" class="current">ACCEUIL</a></li>
-            <li><a href="../TP1JS/index.html">TP1</a></li>
-            <li><a href="../TP2JS/index.html">TP2</a></li>
-            <li><a href="../TP3JS/index.html">TP3</a></li>
-            <li><a href="../TP4JS/index.html">TP4</a></li>
-            <li><a href="../TP5JS/index.html">TP5</a></li>
-             <li><a href="../TP6JS/index.html">TP6</a></li>
-            <li><a rel="nofollow" href="../TP7JS/index.html">TP7</a></li>
-          </ul>
+    <div class="quiz-container" id="quiz">
+        <div class="quiz-header">
+            <h2 id="question">Question Text</h2>
+            <ul id="options">
+                <li>
+                    <input type="radio" id="a" name="reponse" value="premier" class="reponse">
+                    <label for="a" id="questionA"></label>
+                </li>
+                <li>
+                    <input type="radio" id="b" name="reponse" value="deuxieme" class="reponse">
+                    <label for="b" id="questionB"></label>
+                </li>
+                <li>
+                    <input type="radio" id="c" name="reponse" value="troisieme" class="reponse">
+                    <label for="c" id="questionC"></label>
+                </li>
+                <li>
+                    <input type="radio" id="d" name="reponse" value="quatrieme" class="reponse">
+                    <label for="c" id="questionD"></label>
+                </li>
+            </ul>
         </div>
-
-        <h1 class="title">Quizz Javascript</h1>
-
-        <br>
-        <!-- fin menu navigation -->
-    <div id ="quizApp">
-        <div class="question-card" 
-            v-for="(q, iq) in questions"  
-            v-if="iq === currentIndex">
-            <h1 style="text-align: center;"> {{ q.question }} </h1>
-
-            <div v-for="(v, iv) in q.choix">
-                <input type="radio" 
-                    v-bind:name="iq" 
-                    v-bind:id="getVariantId(iq, iv)"
-                    v-bind:value="iv"
-                    v-model="answers[iq]">
-                <label v-bind:for="getVariantId(iq, iv)"> 
-                    <span class="big">{{ v }} </span>
-                </label>
-            </div>
-
-        <button v-on:click="onButtonClick">Suivant</button>
-        </div>
-
-
-
-        <div class="question-card" 
-            v-if="currentIndex === questions.length"
-            >
-            <p><h1>Vous avez trouve: {{ reponsesCorrectes() }} / {{ questions.length }} questions </h1></p>
-            <br><br><br><br><br><br>
-            <button> <a href="index.html" class="text-light">ReJouer</a> </button>
-            <!-- <div v-if="incorrectAnswersIndex.size > 0">
-                <h4> Reponses Incorrectes: </h4>
-
-                <div class="answer-card" 
-                    v-for="idx in incorrectAnswersIndex"
-                    >
-                    <p> {{ questions[idx].text }} </p>
-                    <p> Votre Reponse: {{ questions[idx].choix[answers[idx]] }} </p>
-                    <p> Reponse Correcte: {{ questions[idx].choix[questions[idx].correct] }} </p>
-                </div>
-            </div> -->
-        </div>
-
-
+        <button id="submit">Suivant</button>
     </div>
-
-    <script src="quizTp.js"></script>
 </body>
 </html>
