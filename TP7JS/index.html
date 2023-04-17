@@ -17,10 +17,49 @@ body {
   font-family: 'Segoe UI', roboto;
   font-style: normal;
 }
-.navbar{
-	background: #404477;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
 
+:root {
+  --primary-color: #22254b;
+  --secondary-color: #373b69;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--primary-color);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
+
+header {
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  background-color: var(--secondary-color);
+}
+
+.search {
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  border-radius: 3.125em;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  color: #fff;
+}
+
+.search::placeholder {
+  color: #7378c5;
+}
+
+.search:focus {
+  outline: none;
+  background-color: var(--primary-color);
+}
+
 .mysearch{
 	background: #404477;
 	color: #5D61A3;
@@ -35,13 +74,7 @@ h1{color: white;
   height: 100%;
   width: 100%;
 }
-.bg-cover{
-  background-image: url('medium-cover.jpg');
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  filter: blur(5px);
-  border-image: round;
-}
+
 .brand{
   border: 2px solid white;
   border-radius: 10px;
@@ -59,32 +92,24 @@ h1{color: white;
 </style>
 <body>
 
-<nav class="navbar">
-<main>
-    <a class="navbar-brand brand active" href="index.html" style="float: left;"> ZMovie </a>
-    <section class="search" style="float: right;">
-      <div class="input-group w-auto">
-          <input id="movie-name" type="text" placeholder="Rechercher un Film" class="form-control rounded mysearch" >
-          <button onclick="gererRechercheFilm()" class="btn"></button>
-      </div>
-    </section>
-</main>
-</nav>
-
- <!-- debut navigation -->
-        <div id="stylefive">
-          <ul>
-            <li><a href="../index.html" class="current">ACCEUIL</a></li>
-            <li><a href="../TP1JS/index.html">TP1</a></li>
-            <li><a href="../TP2JS/index.html">TP2</a></li>
-            <li><a href="../TP3JS/index.html">TP3</a></li>
-            <li><a href="../TP4JS/index.html">TP4</a></li>
-            <li><a href="../TP5JS/index.html">TP5</a></li>
-            <li><a href="../TP6JS/index.html">TP6</a></li>
-            <li><a href="../TP7JS/index.html">TP7</a></li>
-          </ul>
+<header>
+    <!-- <a class="brand active" href="index.html" style="float: left;"> ZMovie </a> -->
+    <main>
+      <!-- <section class="search" style="float: right;"> -->
+      <div class="search-input">
+          <input id="movie-name" type="text" placeholder="Rechercher un Film" class="search" autocomplete="off">
+          <div class="autocom-box">
+            <li>google</li>
+            <li>youtube</li>
+            <li>facebook</li>
+            <li>dailymotion</li>
+            <li>iphone</li>
         </div>
- <!-- fin navigation -->
+        <button onclick="gererRechercheFilm()" class="btn"></button> 
+      </div>
+    </main>
+</header>
+
     <main>
         <section class="movie">
           <div id="movie-container" class="movie-container">
@@ -92,6 +117,9 @@ h1{color: white;
         </section>
     </main>
 
+    
+<script src="suggestion.js"></script>
+<script src="autocompletion.js"></script>
 <script type="text/javascript" src="zmovie.js"></script>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
@@ -99,3 +127,6 @@ h1{color: white;
 
 </body>
 </html>
+
+
+

@@ -1,23 +1,21 @@
 const moviesContainer = document.querySelector("#movie-container");
-// const check = document.querySelector("#check");
-// let isCheck = false;
 let search = document.querySelector("#movie-name");
 let isInputCheck = false;
 let patternRecherche = "default";
-
+let page = 1;
+let firstElt = 0
+let lastElt = 8
+let memoire = localStorage
+ImgPath ="/home/kala/joofmusa/Desktop/tpJS/TP7JS/"
+// memoire.clear()
 
 
 let compteur = 0;
-const afficherFilm = (movie) => {
-	compteur ++;
-	// if (Number(window.scrollY)==459) {
-  	// 	// window.scroll(0, 0); // reset the scroll position to the top left of the document.
-  	// 	window.scrollByPages(2);
-	// }
+let listeFilms = []
 
-	// window.scrollByPages(1);
-	// newRow= document.createElement('div');
-	// newRow.classList.add('row');
+const afficherFilm = (movie) => {
+
+	compteur ++;
 
 	const movieCard = document.createElement("div");
 	movieCard.classList.add("movie-card")
@@ -33,7 +31,8 @@ const afficherFilm = (movie) => {
 	const divDescription = document.createElement("div");
 	divDescription.classList.add("description");
 
-	const movieTitle = document.createElement("p");
+	const movieTitle = document.createElement("textarea");
+	// movieTitle.disabled=true
 	movieTitle.classList.add("mytitle");
 	movieTitle.style.fontSize = '18px';
 	movieTitle.style.fontWeight = 'bolder';
@@ -41,7 +40,7 @@ const afficherFilm = (movie) => {
 	movieTitle.style.width='250px'
 	movieTitle.style.wordBreak = 'break-all'
 	movieTitle.innerText = movie.title;
-
+	listeFilms.push(movie.title)
 
 	const divCategory = document.createElement("div");
 	divCategory.classList.add("category");
@@ -69,65 +68,120 @@ const afficherFilm = (movie) => {
 	ranking.innerText = rang
 
 
-	const movieSinopse = document.createElement("span");
+	const movieSinopse = document.createElement("textarea");
 	movieSinopse.classList.add("sinopse")
 	movieSinopse.style.backgroundColor='white'
 	movieSinopse.style.textAlign='left'
-	movieSinopse.innerHTML = '<b>'+'Overview: '+'</b>'+'<br><br>'+movie.overview 
-	movieSinopse.classList.add('hide')
+	let overView = document.createElement("div");
+	overView.innerHTML = '<b>Overview</b>';
+	overView.style.color='white' 
+	movieSinopse.innerHTML = movie.overview 
+	overView.appendChild(movieSinopse)
+	overView.classList.add('hide')
 
 
 	divStars.appendChild(ranking);
-
 	divCategory.appendChild(divStars);
 	divDescription.appendChild(movieTitle);
 	divDescription.appendChild(divCategory);
 	divInfo.appendChild(movieCover);
-	divInfo.appendChild(movieSinopse);
+	divInfo.appendChild(overView);
 	divInfo.appendChild(divDescription);
 
 	movieCard.appendChild(divInfo);
-	// movieCard.appendChild(movieSinopse)
 	moviesContainer.appendChild(movieCard);
+
+	let overArea = document.querySelectorAll(".hide");
+	let titleArea =  document.querySelectorAll('.mytitle')
+	let imgArea =  document.querySelectorAll('.movie-cover')
+
+	imgArea.forEach(myimg => myimg.addEventListener('mouseover', ()=>{
+		newinput = document.createElement('input')
+		newinput.type='file'
+		newinput.setAttribute("id","imageInput")
+		myimg.appendChild(newinput)
+	}))
+
+	imgArea.forEach(myimg => myimg.addEventListener('click', ()=>{
+		var newinput = document.getElementById('imageInput')
+		newinput.click();
+		newinput.addEventListener('change', function(){
+			previewImage(newinput, myimg);
+		});
+
+	}))
+
+
+	overArea.forEach(area => area.addEventListener('mouseover', ()=>{
+		area.classList.remove("hide")
+	}))
+
+	// titleArea.forEach(tarea => tarea.addEventListener('click', ()=>{
+	// 	tarea.disabled = false
+	// }))
+
+
+	titleArea.forEach(tarea => tarea.addEventListener('change', (event)=>{
+		tarea.value = event.target.value;
+  		memoire['title']=tarea.value
+  		// console.log(memoire)
+	}))
+
+	overArea.forEach(area => area.addEventListener('mouseout', ()=>{
+		area.classList.add("hide")
+	}))
+
+	overArea.forEach(area => area.addEventListener('change', (event)=>{
+  		area.value = event.target.value;
+  		memoire['overview']=area.value
+  		// console.log(memoire)
+	}))
+
 	
 
+
 }
 
-let maxY = window.scrollMaxY;
-// maxY =Number(456)
-window.scrollTo(0, maxY);
-
-window.onscroll = function() {
-	myFunction()
-};
-
-function myFunction() {
-  if (document.documentElement.scrollTop == 550) {
-      // document.getElementById("movie-container").classList.add("slideUp");
-  	window.body.classList.add("slideUp");
-
+function previewImage(fileInput, image) {
+  
+  if (fileInput.files && fileInput.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      image.setAttribute('src', e.target.result);
+    }
+    memoire['image']= ImgPath + fileInput.files[0].name
+    // console.log(memoire)
+    reader.readAsDataURL(fileInput.files[0]);
   }
-   // window.scroll(0, 0)
-
 }
 
+function showElement(element) {
+  element.classList.remove("hide");
+}
 
+function getTextareaValue(x, newValue) {
+
+  x.value = newValue;
+  return newValue;
+
+}
 
 
 const effacerListeFilm = () => moviesContainer.innerHTML = "";
 
 const ajouterFilmListe = (movies) => {
 	effacerListeFilm();
+	// movies.slice(0,8).map(movie => afficherFilm(movie));
 	movies.map(movie => afficherFilm(movie));
 }
 
 const getMovies = async (search) => {
 	if (search === "default") {
 		try {
-			const url = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1";
+			const url = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=${page}`;
 			const movies = await fetch(url).then(res => res.json());
 			const data   = await movies.results;
-
+			// const data   = await movies.results.slice(firstElt,lastElt);
 			patternRecherche = "default";
 
 			return ajouterFilmListe(data);
@@ -141,14 +195,24 @@ const getMovies = async (search) => {
 const getMoviesByName = async (nomFilm) => {
 	patternRecherche = nomFilm;
 	try {
-		const url = `https://api.themoviedb.org/3/search/movie?api_key=c01784035bbc1fa42a613a52fd09e823&language=fr&query=${nomFilm}&page=1&include_adult=false`;
+		const url = `https://api.themoviedb.org/3/search/movie?api_key=c01784035bbc1fa42a613a52fd09e823&language=fr&query=${nomFilm}&page=${page}&include_adult=false`;
 		const movies = await fetch(url).then(res => res.json());
 		const data = movies.results;
-
 		ajouterFilmListe(data);
 	} catch (error) {
 		console.log(error);
 	}
+}
+
+const stockageFilm = (id) => {
+	const IDs = memoire.getItem("title");
+	if (IDs !== null) {
+		const allIDs = JSON.parse(IDs);
+		memoire.setItem("title", JSON.stringify([...allIDs, id]));
+		return getMovies(patternRecherche);
+	}
+	memoire.setItem("title", JSON.stringify([id]));
+	return getMovies(patternRecherche);
 }
 
 const gererRechercheFilm = () => {
@@ -159,42 +223,45 @@ const gererRechercheFilm = () => {
 }
 
 const stockerFilm = (id) => {
-	const IDs = localStorage.getItem("idMovie");
+	const IDs = memoire.getItem("idMovie");
 	if (IDs !== null) {
 		const allIDs = JSON.parse(IDs);
-		localStorage.setItem("idMovie", JSON.stringify([...allIDs, id]));
+		memoire.setItem("idMovie", JSON.stringify([...allIDs, id]));
 		return getMovies(patternRecherche);
 	}
-	localStorage.setItem("idMovie", JSON.stringify([id]));
+	memoire.setItem("idMovie", JSON.stringify([id]));
 	return getMovies(patternRecherche);
 }
 
 const rafraichirPage = (idMovies) => {
 	if (idMovies.length > 0) {
-		// isCheck = false;
-		// check.checked = false;
 		return getMovies(patternRecherche);
 	}
 }
 
-const afficherFilmStocke = (id) => {
-	let idMovies = localStorage.getItem("idMovie");
+const effacerFilmStocke = (id) => {
+	let idMovies = memoire.getItem("title");
 	idMovies = JSON.parse(idMovies);
-
 	idMovies = idMovies.filter(idMovie => idMovie != id)
-
-	localStorage.setItem("idMovie", JSON.stringify([...idMovies]));
-
+	memoire.setItem("title", JSON.stringify([...idMovies]));
 	rafraichirPage(idMovies);
 }
 
 const siFilmExiste = (id) => {
-	const IDs = localStorage.getItem("idMovie");
+	const IDs = memoire.getItem("title");
 	if (IDs !== null) {
 		const movieExists = JSON.parse(IDs)
 		return movieExists.includes(id) ? true : false;
 	}
 	return false
+}
+
+
+const FilmFavoris = async (id) => {
+	if (!siFilmExiste(id)) {
+		return stockerFilm(id);
+	}
+	effacerFilmStocke(id)
 }
 
 
@@ -209,21 +276,71 @@ const getMoviebyID = async (id) => {
 	}
 }
 
+const lireFilmFavoris = (arrayIDs) => {
+	let arrayMovies = []
+	arrayIDs.map(id => {
+		arrayMovies.push(getMoviebyID(id))
+	});
+	arrayMovies = Promise.all(arrayMovies).then(favoriteMovies => favoriteMovies)
+	arrayMovies.then(favoriteMovies => ajouterFilmListe(favoriteMovies))
+}
+
+const rechercherFilmFavori= () => {
+	const alertText = "recherchez vos films préférés et cliquez sur favori";
+	let arrayIDs = memoire.getItem("title");
+	arrayIDs = JSON.parse(arrayIDs);
+	arrayIDs.length > 0 ? lireFilmFavoris(arrayIDs) : alert(alertText);
+}
+
 
 window.addEventListener("keydown", (event) => {
 	if (event.key === "Enter") {
 		console.log(search.value)
 		if (search.value !== "") {
 			gererRechercheFilm();
+		}else {
+		window.location.reload();
 		}
 	}
 });
 
 getMovies(patternRecherche);
 
-let mcard= document.querySelectorAll('title')
 
-	mcard.forEach(mc => mc.addEventListener('click', ()=> {
-		movieSinopse.style.display = 'block';
-    }));
+window.addEventListener('scroll', function() {
+   if (window.scrollY >= window.scrollMaxY) {
+   	 page++;
+	 getMovies(patternRecherche)
+	 window.scroll(0,0)
+  
+   }
 
+});
+
+
+
+const searchInput = document.querySelector("#movie-name");
+searchInput.addEventListener('input', function() {
+  const keyword = this.value;
+  rechercheMotCles(keyword);
+});
+
+
+
+function rechercheMotCles(keyword) {
+  fetch(`https://api.themoviedb.org/3/search?keywords=${keyword}`)
+    .then(response => response.json())
+    .then(data => {
+      const resultList = document.getElementById('results');
+      resultList.innerHTML = '';
+      data.forEach(result => {
+        const resultItem = document.createElement('li');
+        resultItem.textContent = result.name;
+        resultList.appendChild(resultItem);
+      });
+    })
+    .catch(error => console.error(error));
+}
+
+
+console.table(memoire)
